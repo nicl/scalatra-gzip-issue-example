@@ -11,13 +11,14 @@ class ExampleServlet extends ExampleGzipIssueStack with FutureSupport with GZipS
   protected implicit def executor = concurrent.ExecutionContext.Implicits.global
   protected implicit val jsonFormats: Formats = DefaultFormats
 
+  case class Example(a: Int)
+
   before() {
     contentType = formats("json")
   }
 
   get("/") {
     Future {
-      case class Example(a: Int)
       Example(1)
     }
   }
